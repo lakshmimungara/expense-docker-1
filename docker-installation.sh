@@ -22,20 +22,20 @@ fi
 
 # Step 1: Update the package manager and install dependencies
 echo -e "${Y}Updating system and installing dependencies...${N}"
-yum update -y | tee -a $LOG_FILE
-yum install -y yum-utils | tee -a $LOG_FILE
+yum update -y &>>$LOG_FILE
+yum install -y yum-utils &>>$LOG_FILE
 
 # Step 2: Add Docker repository
 echo -e "${G}Adding Docker repository...${N}"
-yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo | tee -a $LOG_FILE
+yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo &>>$LOG_FILE
 
 # Step 3: Install Docker
 echo -e "${Y}Installing Docker...${N}"
-yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin | tee -a $LOG_FILE
+yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin &>>$LOG_FILE
 
 # Step 4: Start Docker service
 echo -e "${Y}Starting Docker service...${N}"
-systemctl start docker
+systemctl start docker &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "${G}Docker service started successfully!${N}"
 else
@@ -45,7 +45,7 @@ fi
 
 # Enable Docker service to start at boot
 echo -e "${Y}Enabling Docker service at boot...${N}"
-systemctl enable docker
+systemctl enable docker &>>$LOG_FILE
 if [ $? -eq 0 ]; then
   echo -e "${G}Docker is enabled to start on boot.${N}"
 else
