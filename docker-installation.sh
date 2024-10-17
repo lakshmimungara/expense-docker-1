@@ -21,8 +21,7 @@ else
 fi
 
 # Step 1: Update the package manager and install dependencies
-echo -e "${Y}Updating system and installing dependencies...${N}"
-yum update -y &>>$LOG_FILE
+echo -e "${Y} installing dependencies...${N}"
 yum install -y yum-utils &>>$LOG_FILE
 
 # Step 2: Add Docker repository
